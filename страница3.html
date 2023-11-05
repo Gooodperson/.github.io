@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMFORT PLUS</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+
+<div class="header">
+    <h1>Заголовок страницы</h1>
+</div>
+
+<nav class="navbar">
+    <li>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="страница1.html">Страница 1</a></li>
+        <li><a href="страница2.html">Страница 2 (со ссылкой на фрагмент)</a></li>
+        <li><a href="страница3.html">Страница 3</a></li>
+        <li><a href="страница4.html">Страница 4</a></li>
+        <li><a href="https://www.youtube.com" target="_blank">Внешний сайт (новое окно)</a></li>
+        <li> <a href="https://youtube.com">
+            <img src="youtube.jpeg" alt="youtube">
+        </a>
+    </li>
+    
+</nav>
+
+<div class="navigation">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Получите текущий URL страницы
+            var currentURL = window.location.href;
+
+            // Найти все ссылки в навигационной части
+            var navLinks = document.querySelectorAll(".navbar a");
+
+            // Переберите все ссылки и проверьте, совпадает ли URL ссылки с текущим URL
+            for (var i = 0; i < navLinks.length; i++) {
+                var link = navLinks[i];
+                var linkURL = link.href;
+
+                if (currentURL === linkURL) {
+                    // Установите класс "active" для активной ссылки
+                    link.classList.add("active");
+                }
+            }
+        });
+    </script>
+</div>
+
+<p>списки</p>
+
+<p>Нумерованный список (упорядоченный список):</p>
+
+<ol>
+    <li>Первый пункт</li>
+    <li>Второй пункт</li>
+    <li>Третий пункт</li>
+</ol>
+
+
+<p>Не нумерованный список (неупорядоченный список):</p>
+
+
+<ul>
+    <li>Первый пункт</li>
+    <li>Второй пункт</li>
+    <li>Третий пункт</li>
+</ul>
+
+
+<p>Вложенный список:</p>
+
+
+<ul>
+    <li>Первый пункт</li>
+    <li>Второй пункт
+        <ul>
+            <li>Вложенный пункт 1</li>
+            <li>Вложенный пункт 2</li>
+        </ul>
+    </li>
+    <li>Третий пункт</li>
+</ul>
+
+
+
+</body>
+</html>

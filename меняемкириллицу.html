@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Изменяем кириллицу на латиницу по клику</title>
+</head>
+<body>
+
+    <a href="index.html" >обратно</a>
+
+    <h1>Изменяем кириллицу на латиницу по клику</h1>
+
+    <div class="passport-page" id="page2">
+        <h2>Вторая страница паспорта</h2>
+        <p>Фамилия: Иванов</p>
+        <p>Имя: Иван</p>
+        <p>Отчество: Петрович</p>
+        <p>Дата рождения: 01.01.1990</p>
+    </div>
+
+    <div class="passport-page" id="page3">
+        <h2>Третья страница паспорта</h2>
+        <p>Место рождения: г. Москва</p>
+        <p>Гражданство: Россия</p>
+        <p>Паспорт выдан: УФМС г. Москва</p>
+        <p>Дата выдачи: 01.01.2010</p>
+    </div>
+
+    <button id="convertButton">Изменить на латиницу</button>
+
+    <script>
+        function convertToLatin(text) {
+            const cyrillicToLatin = {
+                'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e',
+                'ё': 'yo', 'ж': 'zh', 'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k',
+                'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r',
+                'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'kh', 'ц': 'ts',
+                'ч': 'ch', 'ш': 'sh', 'щ': 'shch', 'ъ': '', 'ы': 'y', 'ь': '',
+                'э': 'e', 'ю': 'yu', 'я': 'ya'
+            };
+
+            return text.replace(/[а-яё]/ig, char => cyrillicToLatin[char] || char);
+        }
+
+        document.getElementById('convertButton').addEventListener('click', function () {
+            var page2 = document.getElementById("page2");
+            var page3 = document.getElementById("page3");
+
+            var elementsToChange = [page2, page3];
+
+            elementsToChange.forEach(function (page) {
+                var textNodes = page.querySelectorAll('p');
+                textNodes.forEach(function (node) {
+                    var text = node.textContent;
+                    var convertedText = convertToLatin(text);
+                    node.textContent = convertedText;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

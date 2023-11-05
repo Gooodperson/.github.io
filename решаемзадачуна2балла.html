@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Описание и решение алгоритмической задачи</title>
+</head>
+<body>
+    <h1>Описание и решение алгоритмической задачи</h1>
+
+    <p>Опишите задачу и решение:</p>
+    <textarea id="problemDescription" rows="4" cols="50" placeholder="Описание задачи"></textarea><br>
+    <textarea id="solution" rows="4" cols="50" placeholder="Решение задачи"></textarea><br>
+    <p>Введите номер места в плацкартном вагоне:</p>
+    <input type="number" id="seatNumber">
+    <button onclick="checkSolution()">Проверить</button>
+    <button onclick="openHelpPage()" disabled>Помощь</button>
+    <button onclick="solveAndOpenLink()" disabled>Решить и отправить</button>
+
+    <p id="result"></p>
+
+    <script>
+        function determineSeatType(seatNumber) {
+            const isUpper = seatNumber <= 36;
+            const isSide = seatNumber % 2 === 1;
+            const seatType = isUpper ? "верхнее" : "нижнее";
+            const location = isSide ? "боковое" : "в купе";
+            return `Место №${seatNumber} - ${seatType}, ${location}`;
+        }
+
+        function checkSolution() {
+            const problemDescription = document.getElementById("problemDescription").value;
+            const solution = document.getElementById("solution").value;
+            const seatNumber = parseInt(document.getElementById("seatNumber").value);
+
+            if (problemDescription.trim() === "" || solution.trim() === "") {
+                document.getElementById("result").textContent = "Описание и решение не могут быть пустыми.";
+                return;
+            }
+
+            if (isNaN(seatNumber) || seatNumber < 1 || seatNumber > 54) {
+                document.getElementById("result").textContent = "Неверный номер места.";
+                return;
+            }
+
+            // Проверка решения (просто пример)
+            const isSolutionCorrect = true; // Замените на фактическую проверку
+
+            if (isSolutionCorrect) {
+                document.getElementById("result").textContent = "Описание и решение проверены. Можно отправить на сервер.";
+                // Разблокировать кнопку "Решить и отправить"
+                document.querySelector("button:nth-of-type(3)").removeAttribute("disabled");
+            } else {
+                document.getElementById("result").textContent = "Решение неверное. Пожалуйста, нажмите кнопку 'Помощь' для правильного варианта заполнения.";
+                // Разблокировать кнопку "Помощь"
+                document.querySelector("button:nth-of-type(2)").removeAttribute("disabled");
+            }
+        }
+
+        function openHelpPage() {
+            // Замените URL на страницу с правильным вариантом заполнения
+            window.open('https://github.com/vmarshirov/g06u28/blob/main/task_01/task_numbers.pdf', '_blank');
+        }
+
+        function solveAndOpenLink() {
+            const problemDescription = document.getElementById("problemDescription").value;
+            const solution = document.getElementById("solution").value;
+            const seatNumber = parseInt(document.getElementById("seatNumber").value);
+
+            const result = determineSeatType(seatNumber);
+
+            // Отправка данных на удаленный сервер
+            const data = {
+                description: problemDescription,
+                solution: solution,
+                seatNumber: seatNumber,
+                result: result
+            };
+
+            // Пример использования fetch API для отправки данных
+            fetch('https://www.bing.com', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").textContent = `Решение отправлено на сервер: ${data.status}`;
+                // Открыть другую страницу в новом окне (замените URL)
+                window.open('https://www.bing.com', '_blank');
+            })
+            .catch(error => {
+                console.error('Ошибка при отправке данных: ' + error);
+            });
+        }
+    </script>
+</body>
+</html>

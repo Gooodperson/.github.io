@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Решение алгоритмической задачи</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        input {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Решение алгоритмической задачи</h1>
+
+    <p>Введите номер места в плацкартном вагоне:</p>
+    <input type="number" id="seatNumber">
+    <button onclick="determineSeatType()">Определить</button>
+
+    <p id="result"></p>
+
+    <script>
+        function determineSeatType() {
+            const seatNumber = parseInt(document.getElementById("seatNumber").value);
+
+            if (seatNumber < 1 || seatNumber > 54) {
+                document.getElementById("result").textContent = "Неверный номер места";
+                return;
+            }
+
+            const isUpper = seatNumber <= 36;
+            const isSide = seatNumber % 2 === 1;
+            const seatType = isUpper ? "верхнее" : "нижнее";
+            const location = isSide ? "боковое" : "в купе";
+
+            document.getElementById("result").textContent = `Место №${seatNumber} - ${seatType}, ${location}`;
+        }
+    </script>
+</body>
+</html>
